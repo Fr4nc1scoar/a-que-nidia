@@ -950,4 +950,5 @@ body {
     margin-right: 4px;
     object-fit: contain;
     display: inline-block;
+    mix-blend-mode: multiply;
 }
