@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" type="image/jpeg" href="Logo.jpg">
+    <link rel="apple-touch-icon" href="Logo.jpg">
+    <title>Menú | A que Nidia</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Main App Container -->
+    <main class="app-container">
+        <!-- Header -->
+        <header class="header mini-header">
+            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Volver</a>
+            <div class="logo-wrapper mini-logo">
+                <img src="Logo.jpg" alt="A que Nidia Logo" class="logo" onerror="this.src='https://ui-avatars.com/api/?name=AQN&background=e81b6c&color=fff&size=150&rounded=true&font-size=0.4'">
+            </div>
+            <h1 class="brand-name" style="font-size: 1.6rem; letter-spacing: 0;">MENÚ DIGITAL</h1>
+        </header>
+
+        <!-- Menu Section -->
+        <section class="menu-section">
+            <h2 class="section-title">Nuestro Menú 🥟</h2>
+            
+            <div class="products-grid" id="products-grid">
+                <!-- Products will be injected here via JS -->
+            </div>
+            
+            <div class="category-note" id="category-note" style="display:none;">
+                🥟 <strong>Personaliza el sabor de tus empanadas al agregarlas.</strong>
+            </div>
+        </section>
+        
+        <footer style="margin-top: 40px; margin-bottom: 20px; text-align: center; font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">
+            <p>A que Nidia &copy; 2026. Todos los derechos reservados.</p>
+        </footer>
+    </main>
+
+    <!-- Floating Cart Button -->
+    <button class="floating-cart" id="floating-cart">
+        <div class="cart-icon-wrapper">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-badge" id="cart-badge">0</span>
+        </div>
+        <span class="cart-total-preview" id="cart-total-preview">$0.00</span>
+    </button>
+
+    <!-- Customizer Modal -->
+    <div class="customizer-overlay" id="customizer-overlay">
+        <div class="customizer-modal">
+            <div class="customizer-header">
+                <h3 id="customizer-title">Elige el Sabor</h3>
+                <button class="close-customizer" id="close-customizer"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="customizer-body">
+                <p style="font-size: 0.95rem; font-weight: 600; color: var(--text-muted); margin-bottom: 15px;" id="customizer-subtitle">Selecciona los sabores para tu empanada.</p>
+                <div class="flavors-list" id="flavors-list">
+                    <!-- Options injected via JS -->
+                </div>
+            </div>
+            <div class="customizer-footer">
+                <button class="btn-confirm" id="btn-confirm-flavor" disabled>Añadir al Carrito</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="cart-overlay" id="cart-overlay">
+        <div class="cart-modal">
+            <div class="cart-header">
+                <h2>Tu Pedido 🛒</h2>
+                <button class="close-cart" id="close-cart"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div class="cart-body">
+                <div class="cart-items" id="cart-items">
+                    <!-- Cart items injected here -->
+                </div>
+
+                <div class="cart-empty-msg" id="cart-empty-msg">
+                    <div class="empty-icon">🥟</div>
+                    <p>¡Tu carrito está triste y vacío!</p>
+                    <span style="font-size: 0.9rem;">Agrega algo delicioso para continuar.</span>
+                </div>
+
+                <!-- Checkout form is inside the scrollable body -->
+                <div class="checkout-section" id="checkout-section" style="display: none;">
+                    <div class="checkout-divider">
+                        <span>Datos del Pedido</span>
+                    </div>
+
+                    <div class="checkout-form">
+                        <div class="delivery-toggle">
+                            <input type="radio" id="type-delivery" name="delivery_type" value="delivery" checked>
+                            <label for="type-delivery" class="toggle-btn"><i class="fa-solid fa-motorcycle"></i> Delivery</label>
+                            
+                            <input type="radio" id="type-pickup" name="delivery_type" value="pickup">
+                            <label for="type-pickup" class="toggle-btn"><i class="fa-solid fa-person-walking"></i> Pick-Up</label>
+                        </div>
+
+                        <div class="input-group">
+                            <div class="input-icon"><i class="fa-solid fa-user"></i></div>
+                            <input type="text" id="customer_name" placeholder="Tu Nombre y Apellido">
+                        </div>
+
+                        <div class="input-group" id="address_group">
+                            <div class="input-icon"><i class="fa-solid fa-map-pin"></i></div>
+                            <textarea id="customer_address" placeholder="Dirección exacta de entrega (Punto de referencia)" rows="2"></textarea>
+                        </div>
+                        
+                        <div class="input-group">
+                            <div class="input-icon"><i class="fa-solid fa-wallet"></i></div>
+                            <select id="payment_method">
+                                <option value="">¿Cómo vas a pagar?</option>
+                                <option value="Pago Móvil">Pago Móvil</option>
+                                <option value="Efectivo (Divisas)">Efectivo (Divisas exactas)</option>
+                                <option value="Efectivo (Bolívares)">Efectivo (Bolívares)</option>
+                                <option value="Zelle">Zelle</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fixed footer: only total + WhatsApp button -->
+            <div class="cart-footer" id="cart-summary" style="display: none;">
+                <div class="total-row">
+                    <span>Total a Pagar:</span>
+                    <span class="total-amount" id="cart-total">$0.00</span>
+                </div>
+                <button class="btn-primary" id="btn-checkout">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>Pedir por WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">¡Agregado al carrito!</div>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
